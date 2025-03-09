@@ -1,54 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
 
-  const [count, setCount] = useState<number>(0);
-  const [name, setName] = useState<string>("");
-  const [age, setAge] = useState<number>(0);
+  const [students, setStudents] = useState([
+    { id: 1, name: "Eric1", age: 18 },
+    { id: 2, name: "Eric2", age: 18 },
+    { id: 3, name: "Eric3", age: 18 },
+    { id: 4, name: "Eric4", age: 18 },
+    { id: 5, name: "Eric5", age: 18 },
+    { id: 6, name: "Eric6", age: 18 },
+    { id: 7, name: "Eric7", age: 18 },
+    { id: 8, name: "Eric8", age: 18 },
+    { id: 9, name: "Eric9", age: 18 },
+    { id: 10, name: "Eric10", age: 18 },
+  ])
 
   //jsx
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={{ fontSize: 40, fontWeight: "600" }}>Name: {name}</Text>
-        <TextInput
-          autoCapitalize={"words"}
-          multiline
-          onChangeText={(value) => setName(value)}
-          style={{
-            borderColor: "green",
-            borderWidth: 1,
-            width: 200,
-            padding: 15
-          }}
-        />
-      </View>
-
-      <View>
-        <Text style={{ fontSize: 40, fontWeight: "600" }}>Age: {age}</Text>
-        <TextInput
-          onChangeText={(value) => setAge(+value)}
-          style={{
-            borderColor: "green",
-            borderWidth: 1,
-            width: 200,
-            padding: 15
-          }}
-          maxLength={2}
-        />
-      </View>
-
-      <Text style={{ fontSize: 40, fontWeight: "600" }}>
-        count = {count}
-      </Text>
-      <View>
-        <Button
-          color={"red"}
-          title='Increase' onPress={() => setCount(count + 1)}
-        />
-      </View>
+      <Text style={{ fontSize: 60 }}>Hello world</Text>
+      <ScrollView>
+        {students.map(item => {
+          return (
+            <View key={item.id} style={{
+              padding: 30,
+              backgroundColor: "pink",
+              marginBottom: 30
+            }}>
+              <Text>{item.name}</Text>
+            </View>
+          )
+        })}
+      </ScrollView>
     </View>
   );
 }
@@ -56,9 +41,11 @@ export default function App() {
 //css in js
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   }
 });
