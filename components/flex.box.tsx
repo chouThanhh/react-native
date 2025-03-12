@@ -4,10 +4,10 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 40,
         //flexDirection: "row",
-        justifyContent: "center",
+        // justifyContent: "center",
         borderWidth: 1,
         borderColor: "red",
-        alignItems: "center",
+        // alignItems: "center",
         flex: 1
     },
     item1: {

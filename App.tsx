@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Alert, Button, FlatList, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import FlexBox from './components/flex.box';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 interface ITodo {
   id: number;
@@ -48,64 +49,82 @@ export default function App() {
   }
   //jsx
   return (
-    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    //   <View style={styles.container}>
-    //     {/* header */}
-    //     <Text style={styles.header}>Todo App</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        {/* header */}
+        <Text style={styles.header}>Todo App</Text>
 
-    //     {/* form  */}
-    //     <View>
-    //       <TextInput
-    //         value={todo}
-    //         style={styles.todoInput}
-    //         onChangeText={(value) => setTodo(value)}
-    //       />
-    //       <Button title='Add to do'
-    //         onPress={handleAddTodo}
-    //       />
-    //     </View>
+        {/* form  */}
+        <View style={styles.form}>
+          <TextInput
+            value={todo}
+            style={styles.todoInput}
+            onChangeText={(value) => setTodo(value)}
+          />
+          <Button title='Add to do'
+            onPress={handleAddTodo}
+          />
+        </View>
 
-    //     {/* list todo */}
-    //     <View style={styles.body}>
-    //       <FlatList
-    //         data={listTodo}
-    //         keyExtractor={item => item.id + ""}
-    //         renderItem={({ item }) => {
-    //           return (
-    //             <Pressable
-    //               onPress={() => deleteTodo(item.id)}
-    //               style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
-    //             >
-    //               <Text
-    //                 style={styles.todoItem}>{item.name}</Text>
-    //             </Pressable>
-    //           )
-    //         }}
-    //       />
-    //     </View>
+        {/* list todo */}
+        <View style={styles.todo}>
+          <FlatList
+            data={listTodo}
+            keyExtractor={item => item.id + ""}
+            renderItem={({ item }) => {
+              return (
+                <Pressable
+                  onPress={() => deleteTodo(item.id)}
+                  style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+                >
+                  <View style={styles.groupTodo}>
+                    <Text
+                      style={styles.todoItem}>{item.name}</Text>
+                    <AntDesign name="close" size={24} color="black" />
+                  </View>
+                </Pressable>
+              )
+            }}
+          />
+        </View>
 
-    //   </View >
-    // </TouchableWithoutFeedback>
-
-    <FlexBox />
+      </View >
+    </TouchableWithoutFeedback>
   );
 }
 
 //css in js
 const styles = StyleSheet.create({
+  groupTodo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderStyle: "dashed",
+    marginBottom: 15,
+    padding: 15,
+    marginHorizontal: 10
+  },
   header: {
     backgroundColor: 'orange',
     paddingHorizontal: 20,
     textAlign: 'center',
-    fontSize: 45
+    fontSize: 60,
+  },
+  form: {
+    // flex: 2
+    marginBottom: 20
+  },
+  todo: {
+    flex: 1
   },
   container: {
     paddingTop: 50,
-    // paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "red",
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+
   },
   todoInput: {
     borderBottomWidth: 1,
@@ -115,13 +134,12 @@ const styles = StyleSheet.create({
   },
   body: {
     paddingHorizontal: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    flex: 1
   },
   todoItem: {
     fontSize: 30,
-    borderWidth: 1,
-    borderStyle: "dashed",
-    marginBottom: 20,
-    padding: 10
+    // marginBottom: 20,
+    // padding: 10
   }
 });
